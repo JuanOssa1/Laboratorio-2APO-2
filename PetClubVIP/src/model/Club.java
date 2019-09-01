@@ -58,11 +58,19 @@ public class Club {
 		String tmp = "";
 		try {
 			
-			File file = new File("sujeeto.txt");
+			File file = new File("sujeetoPorfaquieromomir.txt");
 			FileReader filRe = new FileReader(file);
 			BufferedReader bufferRead = new BufferedReader(filRe);
+			//PrintReader pread = new PrintReader(bufferRead);
 			
-			 tmp += bufferRead.readLine();
+			if((tmp = bufferRead.readLine()) == null){
+				tmp += "vidacatrehijueputa";
+			}
+				
+			
+			 
+			 bufferRead.close();
+			 filRe.close();
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -71,23 +79,23 @@ public class Club {
 	}
 	public String setUpClub(int year, int month, int day, String id, String name, String allowedPet ){
 		String tmp = "";
-		Calendar date = new GregorianCalendar(year, month, day);
-		Club club = new Club(id, name, allowedPet, date);
+		//Calendar date = new GregorianCalendar(year, month, day);
+		Club club = new Club(id, name, allowedPet, createDates( year,  month,  day));
 		try{
-			File file = new File("sujeeto.txt");
+			File file = new File("sujeetoPorfaquieromomir.txt");
 			FileWriter filwri =  new FileWriter(file);
 			BufferedWriter  buffer = new BufferedWriter(filwri);
 			PrintWriter pWri = new PrintWriter(buffer);
 			clubs.add(club);
 			
-			for(int i = 0; i<clubs.size();i++){
-				if(clubs.get(i) != null){
-					tmp = flatReader();
-					filwri.write(clubs.get(i).toString() + tmp) ;
-					filwri.append(tmp);
-					//tmp = flatReader();
-				}
-			}
+		
+				
+					tmp += flatReader();
+					filwri.write(club.toString() + tmp) ;
+					
+					
+				
+			
 			filwri.close();
 			buffer.close();
 		
@@ -97,4 +105,29 @@ public class Club {
 		}
 		return tmp;
 	}
+	public String searchClubToAdOwner(String id, String ownerID,String name, String lastName,  int year, int month, int day){
+		String msg = "Agregado exitosamente";
+		try {
+			for(int i = 0; i<clubs.size(); i++){
+				if(clubs.get(i).getId().equals(id)){
+					owners.add(creatEOwner( id,  name,  lastName, createDates( year,  month,  day)));		//creatEOwner( id,  name,  lastName, createDates( year,  month,  day));
+				}
+			}
+		}catch(NullPointerException e){
+			
+		}
+		
+		
+		return msg;
+	}
+	public Calendar createDates(int year, int month, int day){
+		Calendar date = new GregorianCalendar(year, month, day);
+		return date;
+	}
+	public OwnerOfPet creatEOwner(String id, String name, String lastName, Calendar bornDate){
+		OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
+		//owners.add(owner);
+		return owner;
+	}
+	
 }
