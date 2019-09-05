@@ -66,5 +66,15 @@ public class Club {
 		
 		return owner;
 	}
+	public void searchOwnerToAddApet(String id, String petId, String petName, String petType, String gender, int year, int month, int day){
+		
+		for(int i = 0; i< owners.size(); i++){
+			if(owners.get(i).getName().equalsIgnoreCase(id)){
+				owners.get(i).addPetToAnOwner(petId, petName, petType, gender, year, month, day);
+			}
+		}
+		
+	}
 	
+	//
 }

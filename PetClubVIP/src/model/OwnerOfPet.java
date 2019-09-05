@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 public class OwnerOfPet {
 	private String id;
@@ -41,5 +42,12 @@ public class OwnerOfPet {
 	public void setBornDate(Calendar bornDate) {
 		this.bornDate = bornDate;
 	}
-	
+	public void addPetToAnOwner(String petId, String petName, String petType, String gender, int year, int month, int day){
+		Pet pet = new Pet( petId,  petName,  createDates( year,  month,  day),  petType,  gender);
+		pets.add(pet);
+	}
+	public Calendar createDates(int year, int month, int day){
+		Calendar date = new GregorianCalendar(year, month, day);
+		return date;
+	}
 }

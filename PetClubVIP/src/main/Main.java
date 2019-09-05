@@ -69,14 +69,11 @@ public class Main {
 						int monthDuenio = dataRead.nextInt();dataRead.nextLine();
 						System.out.println("Ingrese su dia de nacimiento en numeros");
 						int dayDuenio = dataRead.nextInt();dataRead.nextLine();
-						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
-						complete = true;
-						menu(0);
-					break;
-				case 3:	System.out.println("REGISTRO DE MASCOTA");
+						
+						System.out.println("NOS ALEGRA QUE SEA INTEGRANTE DE ESTE PRESTIGIOSO CLUB, PARA COMPLETAR EL REGISTRO DEBE DE TENER AL MENOS UNA MASCOTA");
+						
+						System.out.println("REGISTRO DE MASCOTA");
 						System.out.println("");
-						System.out.println("Ingrese id del cliente al que quiere agregar la mascota");
-						String clientId = dataRead.nextLine();
 						System.out.println("Ingrese el id de la mascota");
 						String petId = dataRead.nextLine();
 						System.out.println("Ingrese el nombre de la mascota");
@@ -88,7 +85,33 @@ public class Main {
 						System.out.println("Ingrese el anio de nacimiento");
 						int petBornYear = dataRead.nextInt();dataRead.nextLine();
 						System.out.println("Ingrese la raza del animal");
-						dataRead.nextLine();
+						String typePet = dataRead.nextLine();
+						System.out.println("Ingrese el sexo de su mascota");
+						String genderOfPet = dataRead.nextLine();
+						
+						
+						
+						
+						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
+						complete = true;
+						menu(0);
+					break;
+				case 3:	System.out.println("REGISTRO DE MASCOTA");
+						System.out.println("");
+						System.out.println("Ingrese id del cliente al que quiere agregar la mascota");
+						String clientIdP = dataRead.nextLine();
+						System.out.println("Ingrese el id de la mascota");
+						String petIdP = dataRead.nextLine();
+						System.out.println("Ingrese el nombre de la mascota");
+						String petNameP = dataRead.nextLine();
+						System.out.println("Ingrese el dia de nacimiento");
+						int petbornDayP =	dataRead.nextInt();dataRead.nextLine();
+						System.out.println("Ingrese el mes de nacimiento");
+						int petBornMonthP = dataRead.nextInt();dataRead.nextLine();
+						System.out.println("Ingrese el anio de nacimiento");
+						int petBornYearP = dataRead.nextInt();dataRead.nextLine();
+						System.out.println("Ingrese la raza del animal");
+						String typePetP = dataRead.nextLine();
 						complete = true;
 						menu(0);
 					break;

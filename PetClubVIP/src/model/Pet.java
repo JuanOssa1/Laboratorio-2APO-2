@@ -7,12 +7,20 @@ public class Pet {
 	private String petName;
 	private Calendar bornDate;
 	private String petType;
-	public Pet(String petId, String petName, Calendar bornDate, String petType) {
+	private String gender;
+	public Pet(String petId, String petName, Calendar bornDate, String petType, String gender) {
 		super();
 		this.petId = petId;
 		this.petName = petName;
 		this.bornDate = bornDate;
 		this.petType = petType;
+		this.gender = gender;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 	public String getPetId() {
 		return petId;
@@ -38,5 +46,5 @@ public class Pet {
 	public void setPetType(String petType) {
 		this.petType = petType;
 	}
-	 
+	 //
 }
