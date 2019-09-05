@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import model.Holding;
+import model.NoPrameterFoundedException;
 
 public class Main {
 	private Scanner dataRead;
@@ -30,7 +31,13 @@ public class Main {
 		int option = selected;
 		if(option == 0){
 			showMenuOptions();
-			option = dataRead.nextInt();
+			try {
+				option = dataRead.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("Lo sentimos no puede ingresar letras en este parametro");
+				showMenuOptions();
+			}
+			
 			dataRead.nextLine();
 		}
 		do {
@@ -47,7 +54,11 @@ public class Main {
 						int day = date.get(Calendar.DAY_OF_MONTH);
 						System.out.println("Ingrese el tipo de mascotas permitidas para este club");
 						String allowedPet = dataRead.nextLine();
+					try {
 						System.out.println(happyholding.setUpClub(year, month, day, clubId, clubName, allowedPet));
+					} catch (NoPrameterFoundedException e1) {
+						System.out.println("Ingreso los valores fuera de los rangos de las fechas permitidas");
+					}
 						complete = true;
 						menu(0);
 					break;
@@ -70,7 +81,11 @@ public class Main {
 						System.out.println("Ingrese su dia de nacimiento en numeros");
 						int dayDuenio = dataRead.nextInt();dataRead.nextLine();
 						
+					try {
 						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
+					} catch (NoPrameterFoundedException e) {
+						System.out.println("Ingreso los valores fuera de los rangos de las fechas permitidas");
+					}
 						
 						System.out.println("NOS ALEGRA QUE SEA INTEGRANTE DE ESTE PRESTIGIOSO CLUB, PARA COMPLETAR EL REGISTRO DEBE DE TENER AL MENOS UNA MASCOTA");
 						

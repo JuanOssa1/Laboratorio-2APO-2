@@ -40,7 +40,7 @@ public class Holding implements Serializable {
 			}
 			return tmp;
 		}
-		public String setUpClub(int year, int month, int day, String id, String name, String allowedPet ){
+		public String setUpClub(int year, int month, int day, String id, String name, String allowedPet ) throws NoPrameterFoundedException{
 			String tmp = "";
 			Club club = new Club(id, name, allowedPet, createDates( year,  month,  day));
 			try{
