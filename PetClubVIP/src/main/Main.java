@@ -4,11 +4,11 @@ import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import model.Club;
+import model.Holding;
 
 public class Main {
 	private Scanner dataRead;
-	private Club happyclub;
+	private Holding happyholding;
 	
 	public Main(){
 		init();
@@ -22,7 +22,7 @@ public class Main {
 	}
 	public void init(){
 		dataRead = new Scanner(System.in);
-		happyclub = new Club(null, null, null, null);
+		happyholding = new Holding();
 		
 	}
 	public void menu(int selected){
@@ -47,7 +47,7 @@ public class Main {
 						int day = date.get(Calendar.DAY_OF_MONTH);
 						System.out.println("Ingrese el tipo de mascotas permitidas para este club");
 						String allowedPet = dataRead.nextLine();
-						System.out.println(happyclub.setUpClub(year, month, day, clubId, clubName, allowedPet));
+						System.out.println(happyholding.setUpClub(year, month, day, clubId, clubName, allowedPet));
 						complete = true;
 						menu(0);
 					break;
@@ -69,8 +69,9 @@ public class Main {
 						int monthDuenio = dataRead.nextInt();dataRead.nextLine();
 						System.out.println("Ingrese su dia de nacimiento en numeros");
 						int dayDuenio = dataRead.nextInt();dataRead.nextLine();
-						System.out.println(happyclub.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
+						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
 						complete = true;
+						menu(0);
 					break;
 				case 3:	System.out.println("REGISTRO DE MASCOTA");
 						System.out.println("");
@@ -88,6 +89,8 @@ public class Main {
 						int petBornYear = dataRead.nextInt();dataRead.nextLine();
 						System.out.println("Ingrese la raza del animal");
 						dataRead.nextLine();
+						complete = true;
+						menu(0);
 					break;
 				case 4: ;
 					break;
