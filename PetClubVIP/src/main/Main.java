@@ -70,6 +70,8 @@ public class Main {
 						System.out.println("Ingrese su dia de nacimiento en numeros");
 						int dayDuenio = dataRead.nextInt();dataRead.nextLine();
 						
+						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
+						
 						System.out.println("NOS ALEGRA QUE SEA INTEGRANTE DE ESTE PRESTIGIOSO CLUB, PARA COMPLETAR EL REGISTRO DEBE DE TENER AL MENOS UNA MASCOTA");
 						
 						System.out.println("REGISTRO DE MASCOTA");
@@ -89,10 +91,11 @@ public class Main {
 						System.out.println("Ingrese el sexo de su mascota");
 						String genderOfPet = dataRead.nextLine();
 						
+						happyholding.addAPetToAnOwner(id, petId, petName, typePet, genderOfPet, petBornYear, petBornMonth, petbornDay);
 						
 						
 						
-						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
+						
 						complete = true;
 						menu(0);
 					break;
@@ -112,6 +115,9 @@ public class Main {
 						int petBornYearP = dataRead.nextInt();dataRead.nextLine();
 						System.out.println("Ingrese la raza del animal");
 						String typePetP = dataRead.nextLine();
+						System.out.println("Ingrese el genro de su mascota");
+						String petGender = dataRead.nextLine();
+						happyholding.addAPetToAnOwner(clientIdP, petIdP, petNameP, typePetP, petGender, petBornYearP, petBornMonthP, petbornDayP);
 						complete = true;
 						menu(0);
 					break;

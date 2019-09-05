@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Pet {
+public class Pet implements Serializable{
 	private String petId;
 	private String petName;
 	private Calendar bornDate;

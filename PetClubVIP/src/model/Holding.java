@@ -10,12 +10,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Holding {
+public class Holding implements Serializable {
 	private ArrayList<Club> clubs;
+	public static String SEARCHROUTE ="C:/Users/Juan Ossa/OneDrive/Universidad Semestre 3/APO 2/Laboratorios/Laboratorio 2 APO 2/Betas/Java/PetClubVIP/serial/work.dat";
 	
 		public Holding(){
 			clubs = new ArrayList<Club>();
@@ -57,14 +59,14 @@ public class Holding {
 			}
 			return tmp;
 		}
-		public String searchClubToAdOwner(String id, String ownerID,String name, String lastName,  int year, int month, int day){
+		public String searchClubToAdOwner(String id, String ownerID,String name, String lastName,  int year, int month, int day) throws NoPrameterFoundedException  {
 			String msg = "Agregado exitosamente";
 			OwnerOfPet tmpOwner = null;
 			try {
 				for(int i = 0; i<clubs.size(); i++){
 					if(clubs.get(i).getId().equals(id)){
 						tmpOwner = creatEOwner( id,  name,  lastName, createDates( year,  month,  day));
-						clubs.get(i).getOwners().add(tmpOwner);		//creatEOwner( id,  name,  lastName, createDates( year,  month,  day));
+						clubs.get(i).getOwners().add(tmpOwner);		
 						saveOwner(tmpOwner);
 					}
 				}
@@ -75,8 +77,20 @@ public class Holding {
 			
 			return msg;
 		}
-		public Calendar createDates(int year, int month, int day){
-			Calendar date = new GregorianCalendar(year, month, day);
+		public Calendar createDates(int year, int month, int day) throws NoPrameterFoundedException{
+			Calendar date = null;
+			boolean dateV = true;
+		
+			
+			if(year>2019 || month>12 || day>31 ){
+				try {
+					throw new NoPrameterFoundedException("Ha ingresado uno o mas valores que exceden la fecha actual");
+				}catch(NoPrameterFoundedException e){
+					
+				}
+			}
+			date = new GregorianCalendar(year, month, day);
+			
 			return date;
 		}
 		
@@ -84,12 +98,12 @@ public class Holding {
 			OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
 			return owner;
 		}
-		public void saveOwner(OwnerOfPet owner){
+		public void saveOwner(OwnerOfPet owner)  {
 			
 			FileOutputStream file = null;
 			
 			try {
-				file = new FileOutputStream("Owners");
+				file = new FileOutputStream(SEARCHROUTE);
 				ObjectOutputStream duct = new ObjectOutputStream(file);
 				duct.writeObject(owner);
 			}
@@ -110,5 +124,12 @@ public class Holding {
 			}
 			
 		}
-	//
+		public void addAPetToAnOwner(String id, String petId, String petName, String petType, String gender, int year, int month, int day){
+			for(int i = 0; i<clubs.size(); i++){
+				if(clubs.get(i).getId().equals(id)){
+				clubs.get(i).searchOwnerToAddApet(id, petId, petName, petType, gender, year, month, day);
+				}
+			}
+		}
+	
 }

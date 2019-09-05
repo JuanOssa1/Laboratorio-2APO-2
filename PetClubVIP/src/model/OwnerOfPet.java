@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class OwnerOfPet {
+public class OwnerOfPet implements Serializable {
 	private String id;
 	private String name;
 	private String lastName;
