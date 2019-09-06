@@ -8,14 +8,14 @@ import java.util.GregorianCalendar;
 public class OwnerOfPet implements Serializable {
 	private String id;
 	private String name;
-	private String lastName;
-	private Calendar bornDate;
+	private String lastname;
+	private String bornDate;
 	private ArrayList<Pet> pets;
-	public OwnerOfPet(String id, String name, String lastName, Calendar bornDate) {
+	public OwnerOfPet(String id, String name, String lastname, String bornDate) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.lastName = lastName;
+		this.lastname = lastname;
 		this.bornDate = bornDate;
 		pets = new ArrayList<Pet>();
 	}
@@ -32,23 +32,20 @@ public class OwnerOfPet implements Serializable {
 		this.name = name;
 	}
 	public String getLastName() {
-		return lastName;
+		return lastname;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastName(String lastname) {
+		this.lastname = lastname;
 	}
-	public Calendar getBornDate() {
+	public String getBornDate() {
 		return bornDate;
 	}
-	public void setBornDate(Calendar bornDate) {
+	public void setBornDate(String bornDate) {
 		this.bornDate = bornDate;
 	}
-	public void addPetToAnOwner(String petId, String petName, String petType, String gender, int year, int month, int day){
-		Pet pet = new Pet( petId,  petName,  createDates( year,  month,  day),  petType,  gender);
+	public void addPetToAnOwner(String petId, String petName, String petType, String gender, String date){
+		Pet pet = new Pet( petId,  petName,petType,   gender,  date);
 		pets.add(pet);
 	}
-	public Calendar createDates(int year, int month, int day){
-		Calendar date = new GregorianCalendar(year, month, day);
-		return date;
-	}
+	
 }

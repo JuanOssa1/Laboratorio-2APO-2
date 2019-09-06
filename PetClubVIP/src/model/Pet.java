@@ -6,10 +6,10 @@ import java.util.Calendar;
 public class Pet implements Serializable{
 	private String petId;
 	private String petName;
-	private Calendar bornDate;
+	private String bornDate;
 	private String petType;
 	private String gender;
-	public Pet(String petId, String petName, Calendar bornDate, String petType, String gender) {
+	public Pet(String petId, String petName, String bornDate, String petType, String gender) {
 		super();
 		this.petId = petId;
 		this.petName = petName;
@@ -35,10 +35,10 @@ public class Pet implements Serializable{
 	public void setPetName(String petName) {
 		this.petName = petName;
 	}
-	public Calendar getBornDate() {
+	public String getBornDate() {
 		return bornDate;
 	}
-	public void setBornDate(Calendar bornDate) {
+	public void setBornDate(String bornDate) {
 		this.bornDate = bornDate;
 	}
 	public String getPetType() {

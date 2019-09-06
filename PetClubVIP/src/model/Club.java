@@ -16,9 +16,9 @@ public class Club  implements Serializable{
 	private ArrayList<OwnerOfPet> owners;
 	private String id;
 	private String name;
-	private Calendar dateOfCreation;
+	private String dateOfCreation;
 	private String allowedPet;
-	public Club(String id, String name, String allowedPet, Calendar dateOfCreation) {
+	public Club(String id, String name, String allowedPet, String dateOfCreation) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,10 +44,10 @@ public class Club  implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Calendar getDateOfCreation() {
+	public String getDateOfCreation() {
 		return dateOfCreation;
 	}
-	public void setDateOfCreation(Calendar dateOfCreation) {
+	public void setDateOfCreation(String dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
 	}
 	public String getAllowedPet() {
@@ -60,21 +60,30 @@ public class Club  implements Serializable{
 		return id + name + dateOfCreation + allowedPet;
 	}
 
-	public OwnerOfPet creatEOwner(String id, String name, String lastName, Calendar bornDate){
+	public OwnerOfPet creatEOwner(String id, String name, String lastName, String bornDate){
 		
 		OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
 		owners.add(owner);
 		
 		return owner;
 	}
-	public void searchOwnerToAddApet(String id, String petId, String petName, String petType, String gender, int year, int month, int day){
+	public void searchOwnerToAddApet(String id, String petId, String petName, String petType, String gender, String date){
 		
 		for(int i = 0; i< owners.size(); i++){
 			if(owners.get(i).getName().equalsIgnoreCase(id)){
-				owners.get(i).addPetToAnOwner(petId, petName, petType, gender, year, month, day);
+				owners.get(i).addPetToAnOwner(petId, petName, petType, gender, date);
 			}
 		}
 		
+	}
+	public int compareClubWithId(Club club){
+		return club.getId().compareTo(id);
+	}
+	public int compareClubWithName(Club club){
+		return club.getName().compareTo(name);
+	}
+	public int compareClubWithDateOfCreation(Club club){
+		return club.getDateOfCreation().compareTo(dateOfCreation);
 	}
 	
 	//

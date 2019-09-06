@@ -23,6 +23,19 @@ public class Holding implements Serializable {
 			clubs = new ArrayList<Club>();
 			
 		}
+		
+		public String addClub(String a, String b ,String c, String d) {
+			String msg = "Todo Perfecto";
+			try{
+				clubs.add(new Club(a,b,c,d));
+			}catch(NullPointerException e){
+				msg = "Falla a la hora de agregar";
+			}
+			
+			return msg;
+			
+			
+		}
 		public String flatReader(){
 			String tmp = "";
 			try {
@@ -40,16 +53,17 @@ public class Holding implements Serializable {
 			}
 			return tmp;
 		}
-		public String setUpClub(int year, int month, int day, String id, String name, String allowedPet ) throws NoPrameterFoundedException{
+		public String setUpClub() throws NoPrameterFoundedException{
 			String tmp = "";
-			Club club = new Club(id, name, allowedPet, createDates( year,  month,  day));
+			
 			try{
 				File file = new File("Clubes.txt");
-				FileWriter filwri =  new FileWriter(file, true);
+				FileWriter filwri =  new FileWriter(file);
 				BufferedWriter  buffer = new BufferedWriter(filwri);
-				clubs.add(club);
 				
-				filwri.write(club.toString());
+				for(int i = 0; i < clubs.size();i++) {
+				filwri.write(clubs.get(i).toString());
+				}
 				
 				filwri.close();
 				buffer.close();
@@ -59,15 +73,15 @@ public class Holding implements Serializable {
 			}
 			return tmp;
 		}
-		public String searchClubToAdOwner(String id, String ownerID,String name, String lastName,  int year, int month, int day) throws NoPrameterFoundedException  {
+		public String searchClubToAdOwner(String id, String ownerID,String name, String lastName,  String date) throws NoPrameterFoundedException  {
 			String msg = "Agregado exitosamente";
 			OwnerOfPet tmpOwner = null;
 			try {
 				for(int i = 0; i<clubs.size(); i++){
 					if(clubs.get(i).getId().equals(id)){
-						tmpOwner = creatEOwner( id,  name,  lastName, createDates( year,  month,  day));
+						tmpOwner = creatEOwner( id,  name,  lastName, date );
 						clubs.get(i).getOwners().add(tmpOwner);		
-						saveOwner(tmpOwner);
+						saveClub(tmpOwner);
 					}
 				}
 			}catch(NullPointerException e){
@@ -77,28 +91,13 @@ public class Holding implements Serializable {
 			
 			return msg;
 		}
-		public Calendar createDates(int year, int month, int day) throws NoPrameterFoundedException{
-			Calendar date = null;
-			boolean dateV = true;
+	
 		
-			
-			if(year>2019 || month>12 || day>31 ){
-				try {
-					throw new NoPrameterFoundedException("Ha ingresado uno o mas valores que exceden la fecha actual");
-				}catch(NoPrameterFoundedException e){
-					
-				}
-			}
-			date = new GregorianCalendar(year, month, day);
-			
-			return date;
-		}
-		
-		public OwnerOfPet creatEOwner(String id, String name, String lastName, Calendar bornDate){
+		public OwnerOfPet creatEOwner(String id, String name, String lastName, String bornDate){
 			OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
 			return owner;
 		}
-		public void saveOwner(OwnerOfPet owner)  {
+		public void saveClub(OwnerOfPet owner)  {
 			
 			FileOutputStream file = null;
 			
@@ -124,12 +123,60 @@ public class Holding implements Serializable {
 			}
 			
 		}
-		public void addAPetToAnOwner(String id, String petId, String petName, String petType, String gender, int year, int month, int day){
-			for(int i = 0; i<clubs.size(); i++){
-				if(clubs.get(i).getId().equals(id)){
-				clubs.get(i).searchOwnerToAddApet(id, petId, petName, petType, gender, year, month, day);
+		public String  addAPetToAnOwner(String id, String petId, String petName, String petType, String gender, String date){
+			String msg = "Todo ha salido bien";
+			
+				for(int i = 0; i<clubs.size(); i++){
+					if(clubs.get(i).getId().equals(id)){
+						clubs.get(i).searchOwnerToAddApet(id, petId, petName, petType, gender, date);
+					
+					}
+				}
+			
+			return msg;
+		}
+		public void organizeWithId(){
+			for(int i = clubs.size(); i>0; i--){
+				
+				for(int j = 0; j<clubs.size(); j++){
+					Club insert = (Club)clubs.get(j);
+					Club actual = (Club)clubs.get(j+1);
+					
+					if(insert.compareClubWithId(actual)>0){
+						 clubs.set(j+1, insert);
+						 clubs.set(j, actual);
+					 }
 				}
 			}
 		}
+		public void organizeWithName(){
+			for(int i = clubs.size(); i>0; i--){
+				for(int j =0; j<clubs.size(); j++) {
+					Club insert = (Club)clubs.get(j);
+					Club actual = (Club)clubs.get(j+1);
+					
+					if(insert.compareClubWithName(actual)>0){
+						clubs.set(j+1, insert);
+						clubs.set(j, actual);
+					}
+				}
+			}
+		}
+		public void organizeWithDate(){
+			for(int i = clubs.size(); i>0; i--){
+				for(int j = 0; j<clubs.size(); i++){
+					Club insert = (Club)clubs.get(j);
+					Club actual = (Club)clubs.get(j+1);
+					
+					if(insert.compareClubWithDateOfCreation(actual)>0){
+						clubs.set(j, actual);
+						clubs.set(j+1, insert);
+					}
+				}
+				
+			}
+		}
+		
+		
 	
 }

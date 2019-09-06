@@ -52,13 +52,10 @@ public class Main {
 						int year = date.get(Calendar.YEAR);
 						int month = date.get(Calendar.MONTH);
 						int day = date.get(Calendar.DAY_OF_MONTH);
+						String dateactual = Integer.toString(year+month+day);
 						System.out.println("Ingrese el tipo de mascotas permitidas para este club");
 						String allowedPet = dataRead.nextLine();
-					try {
-						System.out.println(happyholding.setUpClub(year, month, day, clubId, clubName, allowedPet));
-					} catch (NoPrameterFoundedException e1) {
-						System.out.println("Ingreso los valores fuera de los rangos de las fechas permitidas");
-					}
+						System.out.println(happyholding.addClub(clubId, clubName, dateactual, allowedPet));
 						complete = true;
 						menu(0);
 					break;
@@ -80,9 +77,9 @@ public class Main {
 						int monthDuenio = dataRead.nextInt();dataRead.nextLine();
 						System.out.println("Ingrese su dia de nacimiento en numeros");
 						int dayDuenio = dataRead.nextInt();dataRead.nextLine();
-						
+						String dateactualborn = Integer.toString(yearDuenio+monthDuenio+dayDuenio);
 					try {
-						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, yearDuenio, monthDuenio, dayDuenio));
+						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, dateactualborn));
 					} catch (NoPrameterFoundedException e) {
 						System.out.println("Ingreso los valores fuera de los rangos de las fechas permitidas");
 					}
@@ -105,8 +102,8 @@ public class Main {
 						String typePet = dataRead.nextLine();
 						System.out.println("Ingrese el sexo de su mascota");
 						String genderOfPet = dataRead.nextLine();
-						
-						happyholding.addAPetToAnOwner(id, petId, petName, typePet, genderOfPet, petBornYear, petBornMonth, petbornDay);
+						String dateactualborn2 = Integer.toString(yearDuenio+monthDuenio+dayDuenio);
+						happyholding.addAPetToAnOwner(id, petId, petName, typePet, genderOfPet,dateactualborn2 );
 						
 						
 						
@@ -132,7 +129,8 @@ public class Main {
 						String typePetP = dataRead.nextLine();
 						System.out.println("Ingrese el genro de su mascota");
 						String petGender = dataRead.nextLine();
-						happyholding.addAPetToAnOwner(clientIdP, petIdP, petNameP, typePetP, petGender, petBornYearP, petBornMonthP, petbornDayP);
+						String dateactualborn3 = Integer.toString(petBornYearP+petBornMonthP+petbornDayP);
+						happyholding.addAPetToAnOwner(clientIdP, petIdP, petNameP, typePetP, petGender, dateactualborn3);
 						complete = true;
 						menu(0);
 					break;
