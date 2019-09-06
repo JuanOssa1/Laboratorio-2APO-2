@@ -86,5 +86,64 @@ public class Club  implements Serializable{
 		return club.getDateOfCreation().compareTo(dateOfCreation);
 	}
 	
+	
+	public void organizeWithId(){
+		for(int i = owners.size(); i>0; i--){
+			
+			for(int j = 0; j<owners.size(); j++){
+				OwnerOfPet insert = (OwnerOfPet)owners.get(j);
+				OwnerOfPet actual = (OwnerOfPet)owners.get(j+1);
+				
+				if(insert.compareOwnerWithId(actual)>0){
+					owners.set(j+1, insert);
+					owners.set(j, actual);
+				 }
+			}
+		}
+	}
+	public void organizeWithName(){
+		for(int i = owners.size(); i>0; i--){
+			for(int j =0; j<owners.size(); j++) {
+				OwnerOfPet insert = (OwnerOfPet)owners.get(j);
+				OwnerOfPet actual = (OwnerOfPet)owners.get(j+1);
+				
+				if(insert.compareOwnerWithName(actual)>0){
+					owners.set(j+1, insert);
+					owners.set(j, actual);
+				}
+			}
+		}
+	}
+	public void organizeWithLastName(){
+		for(int i = owners.size(); i>0; i--){
+			for(int j = 0; j<owners.size(); i++){
+				OwnerOfPet insert = (OwnerOfPet)owners.get(j);
+				OwnerOfPet actual = (OwnerOfPet)owners.get(j+1);
+				
+				if(insert.compareOwnerWithLastName(actual)>0){
+					owners.set(j, actual);
+					owners.set(j+1, insert);
+				}
+			}
+			
+		}
+	}
+	public void organizeWithDate(){
+		for(int i = owners.size(); i>0; i--){
+			for(int j = 0; j<owners.size(); i++){
+				OwnerOfPet insert = (OwnerOfPet)owners.get(j);
+				OwnerOfPet actual = (OwnerOfPet)owners.get(j+1);
+				
+				if(insert.compareOwnerWithBornDate(actual)>0){
+					owners.set(j, actual);
+					owners.set(j+1, insert);
+				}
+			}
+			
+		}
+	}
+	
+	
+	
 	//
 }

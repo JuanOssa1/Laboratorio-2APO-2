@@ -47,5 +47,93 @@ public class OwnerOfPet implements Serializable {
 		Pet pet = new Pet( petId,  petName,petType,   gender,  date);
 		pets.add(pet);
 	}
+	public int compareOwnerWithId(OwnerOfPet owner){
+		return owner.getId().compareTo(id);
+	}
+	public int compareOwnerWithName(OwnerOfPet owner){
+		return owner.getName().compareTo(name);
+	}
+	public int compareOwnerWithLastName(OwnerOfPet owner){
+		return owner.getLastName().compareTo(lastname);
+	}
+	public int compareOwnerWithBornDate(OwnerOfPet owner){
+		return owner.getBornDate().compareTo(bornDate);
+	}
+	
+	
+	public void organizeWithId(){
+		for(int i = pets.size(); i>0; i--){
+			
+			for(int j = 0; j<pets.size(); j++){
+				Pet insert = (Pet)pets.get(j);
+				Pet actual = (Pet)pets.get(j+1);
+				
+				if(insert.comparePetWithId(actual)>0){
+					pets.set(j+1, insert);
+					pets.set(j, actual);
+				 }
+			}
+		}
+	}
+	
+	public void organizeWithName(){
+		for(int i = pets.size(); i>0; i--){
+			
+			for(int j = 0; j<pets.size(); j++){
+				Pet insert = (Pet)pets.get(j);
+				Pet actual = (Pet)pets.get(j+1);
+				
+				if(insert.comparePetWithName(actual)>0){
+					pets.set(j+1, insert);
+					pets.set(j, actual);
+				 }
+			}
+		}
+	}
+	public void organizeWithBornDate(){
+		for(int i = pets.size(); i>0; i--){
+			
+			for(int j = 0; j<pets.size(); j++){
+				Pet insert = (Pet)pets.get(j);
+				Pet actual = (Pet)pets.get(j+1);
+				
+				if(insert.comparePetWithBornDate(actual)>0){
+					pets.set(j+1, insert);
+					pets.set(j, actual);
+				 }
+			}
+		}
+	}
+	public void organizeWithType(){
+		for(int i = pets.size(); i>0; i--){
+			
+			for(int j = 0; j<pets.size(); j++){
+				Pet insert = (Pet)pets.get(j);
+				Pet actual = (Pet)pets.get(j+1);
+				
+				if(insert.comparePetWithType(actual)>0){
+					pets.set(j+1, insert);
+					pets.set(j, actual);
+				 }
+			}
+		}
+	}
+	public void organizeWithGender(){
+		for(int i = pets.size(); i>0; i--){
+			
+			for(int j = 0; j<pets.size(); j++){
+				Pet insert = (Pet)pets.get(j);
+				Pet actual = (Pet)pets.get(j+1);
+				
+				if(insert.comparePetWithGender(actual)>0){
+					pets.set(j+1, insert);
+					pets.set(j, actual);
+				 }
+			}
+		}
+	}
+	
+	
+	
 	
 }

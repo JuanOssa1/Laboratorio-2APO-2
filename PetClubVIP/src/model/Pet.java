@@ -47,5 +47,37 @@ public class Pet implements Serializable{
 	public void setPetType(String petType) {
 		this.petType = petType;
 	}
+	
+	
+	
+
+	public int comparePetWithId(Pet pet){
+		return pet.getPetId().compareTo(petId);
+	}
+	public int comparePetWithName(Pet pet){
+		return pet.getPetName().compareTo(petName);
+	}
+	public int comparePetWithBornDate(Pet pet){
+		return pet.getBornDate().compareTo(bornDate);
+	}
+	public int comparePetWithType(Pet pet){
+		return pet.getPetType().compareTo(petType);
+	}
+	public int comparePetWithGender(Pet pet){
+		return pet.getGender().compareTo(gender);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	 //
 }
