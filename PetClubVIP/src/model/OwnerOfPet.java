@@ -136,7 +136,13 @@ public class OwnerOfPet implements Serializable {
 			}
 		}
 	}
-	
+	public String HEYHEYHEY(){
+		String tmp = "";
+		for(int i =0;i<pets.size(); i++){
+			tmp+= pets.get(i).getPetName();
+		}
+		return tmp;
+	}
 	
 	
 	

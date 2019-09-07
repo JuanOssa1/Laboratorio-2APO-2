@@ -25,6 +25,9 @@ public class Main {
 		dataRead = new Scanner(System.in);
 		happyholding = new Holding();
 		
+		
+		
+		
 	}
 	public void menu(int selected){
 		boolean complete = false;
@@ -56,6 +59,7 @@ public class Main {
 						System.out.println("Ingrese el tipo de mascotas permitidas para este club");
 						String allowedPet = dataRead.nextLine();
 						System.out.println(happyholding.addClub(clubId, clubName, dateactual, allowedPet));
+						System.out.println(happyholding.GOGOGO() );
 						complete = true;
 						menu(0);
 					break;
@@ -104,7 +108,7 @@ public class Main {
 						String genderOfPet = dataRead.nextLine();
 						String dateactualborn2 = Integer.toString(yearDuenio+monthDuenio+dayDuenio);
 						happyholding.addAPetToAnOwner(id, petId, petName, typePet, genderOfPet,dateactualborn2 );
-						
+						System.out.println(happyholding.GOGOGO2());
 						
 						
 						
@@ -131,6 +135,7 @@ public class Main {
 						String petGender = dataRead.nextLine();
 						String dateactualborn3 = Integer.toString(petBornYearP+petBornMonthP+petbornDayP);
 						happyholding.addAPetToAnOwner(clientIdP, petIdP, petNameP, typePetP, petGender, dateactualborn3);
+						
 						complete = true;
 						menu(0);
 					break;

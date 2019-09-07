@@ -23,8 +23,23 @@ public class Holding implements Serializable {
 		public Holding(){
 			clubs = new ArrayList<Club>();
 			//loadClub();
+			
+			/*
+			Club club1 = new Club("", "", "", "");
+			Club club2 = new Club("", "", "", "");
+			Club club3 = new Club("", "", "", "");
+			Club club4 = new Club("", "", "", "");
+			Club club5 = new Club("", "", "", "");
+			clubs.add(club1);
+			clubs.add(club2);
+			clubs.add(club3);
+			clubs.add(club4);
+			clubs.add(club5);
+			*/
+			
 			setUpClub();
 			loadClub();
+			
 		}
 		
 		public String addClub(String a, String b ,String c, String d) {
@@ -62,7 +77,7 @@ public class Holding implements Serializable {
 			
 			try{
 				File file = new File(FLATCLUBES);
-				FileWriter filwri =  new FileWriter(file);
+				FileWriter filwri =  new FileWriter(file, true);
 				BufferedWriter  buffer = new BufferedWriter(filwri);
 				
 				for(int i = 0; i < clubs.size();i++) {
@@ -192,24 +207,27 @@ public class Holding implements Serializable {
 				File	file = new File(FLATCLUBES);
 				FileReader	frReader = new FileReader(file);
 				BufferedReader	bufferRead = new BufferedReader(frReader);
-				
-				while((saveString = bufferRead.readLine())!= null){
-					//saveString = bufferRead.readLine();
-					
-					String[] parts = saveString.split("-");
-					String part1 = parts[0];
-					String part2 = parts[1];
-					String part3 = parts[2];
-					String part4 = parts[3];
-					
-					Club club = new Club(part1, part2, part3, part4);
-					c.add(club);
-					
+				if((saveString = bufferRead.readLine())!= null){
+					while((saveString = bufferRead.readLine())!= null){
+						saveString = bufferRead.readLine();
+						
+						String[] parts = saveString.split("-");
+						String part1 = parts[0];
+						String part2 = parts[1];
+						String part3 = parts[2];
+						String part4 = parts[3];
+						
+						Club club = new Club(part1, part2, part3, part4);
+						clubs = c;
+						c.add(club);
+						
+					}
 				}
-				c = clubs;
+				
+				//clubs = c;
 				
 				
-			
+			//Esta guardando el archivo pero no lo esta leyendo
 				
 				bufferRead.close();
 				frReader.close();
@@ -219,11 +237,31 @@ public class Holding implements Serializable {
 			}
 			catch(Exception e){
 				System.out.println("Ayyyy que man tan de malas");
+				e.printStackTrace();
 			}
 				
 		
 		
-	}
+		}
+		public String GOGOGO(){
+			String tmp = "";
+			String rnt = "";
+			for(int i = 0; i<clubs.size(); i++){
+				tmp += clubs.get(i).getName();
+				
+			}
+			return tmp + rnt;
+		} 
+		public String GOGOGO2(){
+			String tmp = "";
+			String rnt = "";
+			for(int i = 0; i<clubs.size(); i++){
+				
+				rnt += clubs.get(i).getOwners().get(i).getName();
+			}
+			return rnt;
+		
+		}
 		
 		
 		

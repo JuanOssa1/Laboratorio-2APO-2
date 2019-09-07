@@ -66,7 +66,7 @@ public class Club  implements Serializable{
 		this.allowedPet = allowedPet;
 	}
 	public String toString(){
-		return id + name + dateOfCreation + allowedPet;
+		return id+"-"+name+"-" + dateOfCreation+ "-" + allowedPet;
 	}
 
 	public int compareClubWithId(Club club){
