@@ -3,9 +3,14 @@ package model;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +18,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Club  implements Serializable{
+	//public static String SEARCHROUTE ="C:/Users/Juan Ossa/OneDrive/Universidad Semestre 3/APO 2/Laboratorios/Laboratorio 2 APO 2/Betas/Java/PetClubVIP/serial/work.dat";
+	public static String SEARCHROUTE ="data/owners.dat";
 	private ArrayList<OwnerOfPet> owners;
 	private String id;
 	private String name;
@@ -25,6 +32,8 @@ public class Club  implements Serializable{
 		this.dateOfCreation = dateOfCreation;
 		this.allowedPet = allowedPet;
 		owners = new ArrayList<OwnerOfPet>();
+		fileCreator();
+		loadOwner();
 	}
 	public String getId() {
 		return id;
@@ -60,22 +69,6 @@ public class Club  implements Serializable{
 		return id + name + dateOfCreation + allowedPet;
 	}
 
-	public OwnerOfPet creatEOwner(String id, String name, String lastName, String bornDate){
-		
-		OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
-		owners.add(owner);
-		
-		return owner;
-	}
-	public void searchOwnerToAddApet(String id, String petId, String petName, String petType, String gender, String date){
-		
-		for(int i = 0; i< owners.size(); i++){
-			if(owners.get(i).getName().equalsIgnoreCase(id)){
-				owners.get(i).addPetToAnOwner(petId, petName, petType, gender, date);
-			}
-		}
-		
-	}
 	public int compareClubWithId(Club club){
 		return club.getId().compareTo(id);
 	}
@@ -144,6 +137,110 @@ public class Club  implements Serializable{
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	public OwnerOfPet creatEOwner(String id, String name, String lastName, String bornDate){
+		
+		OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
+		owners.add(owner);
+		//fileCreator();
+		return owner;
+	}
+
+
+
+
+
+
+	public void searchOwnerToAddApet(String id, String petId, String petName, String petType, String gender, String date){
+		
+		for(int i = 0; i< owners.size(); i++){
+			if(owners.get(i).getName().equalsIgnoreCase(id)){
+				owners.get(i).addPetToAnOwner(petId, petName, petType, gender, date);
+			}
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void fileCreator()  {
+		
+		FileOutputStream file = null;
+		
+		try {
+			file = new FileOutputStream(SEARCHROUTE);
+			ObjectOutputStream duct = new ObjectOutputStream(file);
+			duct.writeObject(owners);
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		finally{
+			
+			try{
+				file.close();
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	public void createFile(){
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public void loadOwner(){
+		FileInputStream archivoCodificadoEntrada = null;
+		//File file = new File(SEARCHROUTE);
+		ArrayList<OwnerOfPet> p;
+		
+		try {
+			
+			/*if(file.exists()){*/
+				archivoCodificadoEntrada = new FileInputStream(SEARCHROUTE);
+				ObjectInputStream conductoEntrada = new ObjectInputStream(archivoCodificadoEntrada);
+				p = (ArrayList<OwnerOfPet>)conductoEntrada.readObject();
+				owners = p;
+			/*}*/
+			/*
+			else{
+				
+				file.createNewFile();
+				
+			}
+			*/
+		}
+		catch(FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+	}
 	
 	//
 }

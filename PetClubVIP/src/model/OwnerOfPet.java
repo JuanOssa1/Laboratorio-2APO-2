@@ -6,6 +6,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class OwnerOfPet implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1108525721666481918L;
 	private String id;
 	private String name;
 	private String lastname;

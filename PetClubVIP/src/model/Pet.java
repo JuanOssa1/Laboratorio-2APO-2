@@ -4,6 +4,13 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 public class Pet implements Serializable{
+	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1667488029134183905L;
 	private String petId;
 	private String petName;
 	private String bornDate;
