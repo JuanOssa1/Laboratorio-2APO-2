@@ -22,23 +22,11 @@ public class Holding implements Serializable {
 	
 		public Holding(){
 			clubs = new ArrayList<Club>();
-			//loadClub();
 			
-			/*
-			Club club1 = new Club("", "", "", "");
-			Club club2 = new Club("", "", "", "");
-			Club club3 = new Club("", "", "", "");
-			Club club4 = new Club("", "", "", "");
-			Club club5 = new Club("", "", "", "");
-			clubs.add(club1);
-			clubs.add(club2);
-			clubs.add(club3);
-			clubs.add(club4);
-			clubs.add(club5);
-			*/
 			
 			setUpClub();
 			loadClub();
+			adderOfOwners();
 			
 		}
 		
@@ -218,8 +206,7 @@ public class Holding implements Serializable {
 						String part4 = parts[3];
 						
 						Club club = new Club(part1, part2, part3, part4);
-						clubs = c;
-						c.add(club);
+						clubs.add(club);
 						
 					}
 				}
@@ -251,7 +238,43 @@ public class Holding implements Serializable {
 				
 			}
 			return tmp + rnt;
-		} 
+		}
+		public void adderOfOwners(){
+			int centinel = 0;
+		
+			String tmp = "";
+			try {
+				
+				File file = new File("mocks/PORFINOWNERS.csv");
+				FileReader filRe = new FileReader(file);
+				BufferedReader bufferRead = new BufferedReader(filRe);
+				for (int i = 0; i<clubs.size(); i++) {
+					while(centinel<10000 && (tmp=bufferRead.readLine())!=null) {
+						String[] parts = tmp.split(",");
+						String part1 = parts[0];
+						String part2 = parts[1];
+						String part3 = parts[2];
+						String part4 = parts[3];
+						centinel++;
+						clubs.get(i).creatEOwner(part1, part2, part3, part4);
+						
+						System.out.println( clubs.get(i).getOwners().get(i).toString());
+						
+					}
+				}
+				 
+				 bufferRead.close();
+				 filRe.close();
+				
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+			
+			
+			
+		}
+		/*
 		public String GOGOGO2(){
 			String tmp = "";
 			String rnt = "";
@@ -262,7 +285,7 @@ public class Holding implements Serializable {
 			return rnt;
 		
 		}
-		
+		*/
 		
 		
 	

@@ -108,11 +108,11 @@ public class Main {
 						String genderOfPet = dataRead.nextLine();
 						String dateactualborn2 = Integer.toString(yearDuenio+monthDuenio+dayDuenio);
 						happyholding.addAPetToAnOwner(id, petId, petName, typePet, genderOfPet,dateactualborn2 );
-						System.out.println(happyholding.GOGOGO2());
+						//System.out.println(happyholding.GOGOGO2());
 						
 						
 						
-						complete = true;
+						complete = true; 
 						menu(0);
 					break;
 				case 3:	System.out.println("REGISTRO DE MASCOTA");
@@ -140,6 +140,8 @@ public class Main {
 						menu(0);
 					break;
 				case 4: ;
+					System.out.println("GRACIAS!!!!");
+					complete = true;
 					break;
 				case 5: ;
 					break;
