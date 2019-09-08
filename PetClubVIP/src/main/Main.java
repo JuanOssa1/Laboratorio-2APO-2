@@ -58,6 +58,7 @@ public class Main {
 						String dateactual = Integer.toString(year+month+day);
 						System.out.println("Ingrese el tipo de mascotas permitidas para este club");
 						String allowedPet = dataRead.nextLine();
+						long t1 = System.nanoTime();
 						System.out.println(happyholding.addClub(clubId, clubName, dateactual, allowedPet));
 						
 						complete = true;
@@ -140,17 +141,17 @@ public class Main {
 						menu(0);
 					break;
 				case 4: System.out.println("Ordenar Clubes por ID");
-						happyholding.organizeWithId();
+						System.out.println(happyholding.organizeWithId());
 						complete = true;
 						menu(0);
 					break;
 				case 5: System.out.println("Ordenar Clubes por nombre");
-						happyholding.organizeWithName(); 
+						System.out.println(happyholding.organizeWithName());
 						complete = true;
 						menu(0);
-					break;
+					break; 
 				case 6: System.out.println("Ordenar Clubes por Fecha");
-						happyholding.organizeWithDate();
+						System.out.println(happyholding.organizeWithDate());
 						complete = true;
 						menu(0);
 					break;

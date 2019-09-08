@@ -21,9 +21,9 @@ public class Club  implements Serializable{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	//public static String SEARCHROUTE ="C:/Users/Juan Ossa/OneDrive/Universidad Semestre 3/APO 2/Laboratorios/Laboratorio 2 APO 2/Betas/Java/PetClubVIP/serial/work.dat";
-	public static String SEARCHROUTE ="data/owners.dat";
+	
+	
+	public static String SEARCHROUTE ="cargadores/SerializedOwners";
 	private ArrayList<OwnerOfPet> owners;
 	private String id;
 	private String name;
@@ -36,11 +36,7 @@ public class Club  implements Serializable{
 		this.dateOfCreation = dateOfCreation;
 		this.allowedPet = allowedPet;
 		owners = new ArrayList<OwnerOfPet>();
-//		creatEOwner("2", "JULIANA", "MENDOZA", "07082001");
-//		creatEOwner("3", "julian", "insus", "03092002");
-//		creatEOwner("4", "Esteban", "Ariza", "03102005");
-//		creatEOwner("5", "victor", "vargas", "07082013");
-//		creatEOwner("6", "yojam", "giraldo", "07032009");
+
 		fileCreator();
 		loadOwner();
 	}
@@ -91,21 +87,22 @@ public class Club  implements Serializable{
 		return identification.compareTo(id);
 	}
 	
-	
+	/*
 	public void organizeWithId(){
-		for(int i = owners.size(); i>0; i--){
-			
-			for(int j = 0; j<owners.size(); j++){
-				OwnerOfPet insert = (OwnerOfPet)owners.get(j);
-				OwnerOfPet actual = (OwnerOfPet)owners.get(j+1);
+
+		String info = "";
+		for (int i = 1; i<owners.size(); i++){
+			for(int j = i; j>0 && owners.get(j-1).compareClubWithDateOfCreation(owners.get(j)) > 0; j--){
+				OwnerOfPet tmp = owners.get(j);
+				clubs.set(j, clubs.get(j-1));
+				clubs.set(j-1, tmp);
 				
-				if(insert.compareOwnerWithId(actual)>0){
-					owners.set(j+1, insert);
-					owners.set(j, actual);
-				 }
 			}
+			info += clubs.get(i).toString();
 		}
+		return info;
 	}
+	*/
 	public void organizeWithName(){
 		for(int i = owners.size(); i>0; i--){
 			for(int j =0; j<owners.size(); j++) {
@@ -153,14 +150,14 @@ public class Club  implements Serializable{
 	
 	
 	
+	//LLAMO ACA FILE CREATTOR 
 	
-	
-	public OwnerOfPet creatEOwner(String id, String name, String lastName, String bornDate){
+	public void creatEOwner(String id, String name, String lastName, String bornDate){
 		
 		OwnerOfPet owner = new OwnerOfPet( id,  name,  lastName,  bornDate);
 		owners.add(owner);
-		//fileCreator();
-		return owner;
+		fileCreator();
+		
 	}
 
 
@@ -187,27 +184,19 @@ public class Club  implements Serializable{
 	
 	public void fileCreator()  {
 		
-		FileOutputStream file = null;
+		
 		
 		try {
-			file = new FileOutputStream(SEARCHROUTE);
-			ObjectOutputStream duct = new ObjectOutputStream(file);
+			
+			ObjectOutputStream duct = new ObjectOutputStream(new FileOutputStream(SEARCHROUTE));
 			duct.writeObject(owners);
+			duct.close();
 		}
 		catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
 		catch(IOException e){
 			e.printStackTrace();
-		}
-		finally{
-			
-			try{
-				file.close();
-			}
-			catch(IOException e){
-				e.printStackTrace();
-			}
 		}
 		
 	}

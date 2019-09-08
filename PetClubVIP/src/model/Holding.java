@@ -18,8 +18,8 @@ import java.util.GregorianCalendar;
 public class Holding implements Serializable {
 	private ArrayList<Club> clubs;
 	public static String FLATCLUBES = "data/Clubes.txt";
-	public static String FLATOWNERS = "data/Clubes1.txt";
-	public static String FLATPETS = "data/Clubes2.txt";
+	public static String FLATOWNERS = "data/OwnersToSerialize.txt";
+	public static String FLATPETS = "data/PetsToSerialize.txt";
 
 	
 		public Holding(){
@@ -156,6 +156,7 @@ public class Holding implements Serializable {
 			
 			return msg;
 		}
+		/*
 		public String organizeWithId(){
 			
 			String info = "";
@@ -174,40 +175,50 @@ public class Holding implements Serializable {
 			}
 			return info;
 		}
+		*/
+		public String organizeWithId(){
+			String info = "";
+			for (int i = 1; i<clubs.size(); i++){
+				for(int j = i; j>0 && clubs.get(j-1).compareClubWithId(clubs.get(j)) > 0; j--){
+					Club tmp = clubs.get(j);
+					clubs.set(j, clubs.get(j-1));
+					clubs.set(j-1, tmp);
+					
+				}
+				info += clubs.get(i).toString();
+			}
+			return info;
+			
+		}
 		public String organizeWithName(){
 			
 			String info = "";
-			for(int i = clubs.size(); i>0; i--){
-				for(int j =0; j<clubs.size(); j++) {
-					Club insert = (Club)clubs.get(j);
-					Club actual = (Club)clubs.get(j+1);
+			for (int i = 1; i<clubs.size(); i++){
+				for(int j = i; j>0 && clubs.get(j-1).compareClubWithName(clubs.get(j)) > 0; j--){
+					Club tmp = clubs.get(j);
+					clubs.set(j, clubs.get(j-1));
+					clubs.set(j-1, tmp);
 					
-					if(insert.compareClubWithName(actual)>0){
-						clubs.set(j+1, insert);
-						clubs.set(j, actual);
-					}
 				}
-				
-				info = clubs.get(i).toString();
+				info += clubs.get(i).toString();
 			}
 			return info;
+			
 		}
 		public String organizeWithDate(){
 			
 			String info = "";
-			for(int i = clubs.size(); i>0; i--){
-				for(int j = 0; j<clubs.size(); i++){
-					Club insert = (Club)clubs.get(j);
-					Club actual = (Club)clubs.get(j+1);
+			for (int i = 1; i<clubs.size(); i++){
+				for(int j = i; j>0 && clubs.get(j-1).compareClubWithDateOfCreation(clubs.get(j)) > 0; j--){
+					Club tmp = clubs.get(j);
+					clubs.set(j, clubs.get(j-1));
+					clubs.set(j-1, tmp);
 					
-					if(insert.compareClubWithDateOfCreation(actual)>0){
-						clubs.set(j, actual);
-						clubs.set(j+1, insert);
-					}
 				}
-				info = clubs.get(i).toString();
+				info += clubs.get(i).toString();
 			}
 			return info;
+			
 		}
 		
 		
@@ -264,7 +275,7 @@ public class Holding implements Serializable {
                 for (int i = 0; i<clubs.size(); i++) {
                     int centinel = 0;
                     String tmp = bufferRead.readLine();
-                    while((tmp)!=null && centinel < 10000) {
+                    while((tmp)!=null && centinel < 100) {
                         //tmp = bufferRead.readLine();
                         String[] parts = tmp.split(",");
                         String part1 = parts[0];
@@ -277,7 +288,9 @@ public class Holding implements Serializable {
 
 
                     }
+                    
                 }
+
 
                  bufferRead.close();
                  filRe.close();
@@ -286,7 +299,8 @@ public class Holding implements Serializable {
             catch(Exception e){
                 e.printStackTrace();
             }
-
+            
+  
 
 
         }
