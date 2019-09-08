@@ -18,6 +18,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class Club  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//public static String SEARCHROUTE ="C:/Users/Juan Ossa/OneDrive/Universidad Semestre 3/APO 2/Laboratorios/Laboratorio 2 APO 2/Betas/Java/PetClubVIP/serial/work.dat";
 	public static String SEARCHROUTE ="data/owners.dat";
 	private ArrayList<OwnerOfPet> owners;
@@ -32,14 +36,13 @@ public class Club  implements Serializable{
 		this.dateOfCreation = dateOfCreation;
 		this.allowedPet = allowedPet;
 		owners = new ArrayList<OwnerOfPet>();
-		creatEOwner("2", "JULIANA", "MENDOZA", "07082001");
-		creatEOwner("3", "julian", "insus", "03092002");
-		creatEOwner("4", "Esteban", "Ariza", "03102005");
-		creatEOwner("5", "victor", "vargas", "07082013");
-		creatEOwner("6", "yojam", "giraldo", "07032009");
+//		creatEOwner("2", "JULIANA", "MENDOZA", "07082001");
+//		creatEOwner("3", "julian", "insus", "03092002");
+//		creatEOwner("4", "Esteban", "Ariza", "03102005");
+//		creatEOwner("5", "victor", "vargas", "07082013");
+//		creatEOwner("6", "yojam", "giraldo", "07032009");
 		fileCreator();
 		loadOwner();
-		adderOfOwners();
 	}
 	public String getId() {
 		return id;
@@ -83,6 +86,9 @@ public class Club  implements Serializable{
 	}
 	public int compareClubWithDateOfCreation(Club club){
 		return club.getDateOfCreation().compareTo(dateOfCreation);
+	}
+	public int compareClubWithId(String identification){
+		return identification.compareTo(id);
 	}
 	
 	
@@ -247,42 +253,6 @@ public class Club  implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	
-	public void adderOfOwners(){
-		int centinel = 0;
-	
-		String tmp = "";
-		try {
-			
-			File file = new File("mocks/PORFINPETS");
-			FileReader filRe = new FileReader(file);
-			BufferedReader bufferRead = new BufferedReader(filRe);
-			for (int i = 0; i<owners.size(); i++) {
-				while(centinel<2 && (tmp=bufferRead.readLine())!=null) {
-					String[] parts = tmp.split(",");
-					String part1 = parts[0];
-					String part2 = parts[1];
-					String part3 = parts[2];
-					String part4 = parts[3];
-					String part5 = parts[4];
-					owners.get(i).addPetToAnOwner(part1, part2, part3, part4, part5);/*creatEOwner(part1, part2, part3, part4)*/;
-					centinel++;
-				}
-				
-			}
-			 
-			 bufferRead.close();
-			 filRe.close();
-			
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
-		
-		
-		
-	}
-	
 	
 	
 	//

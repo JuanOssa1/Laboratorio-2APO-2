@@ -48,7 +48,7 @@ public class OwnerOfPet implements Serializable {
 		this.bornDate = bornDate;
 	}
 	public void addPetToAnOwner(String petId, String petName, String petType, String gender, String date){
-		Pet pet = new Pet( petId,  petName,petType,   gender,  date);
+		Pet pet = new Pet( petId,  petName, petType,   gender,  date);
 		pets.add(pet);
 	}
 	public int compareOwnerWithId(OwnerOfPet owner){
@@ -136,6 +136,7 @@ public class OwnerOfPet implements Serializable {
 			}
 		}
 	}
+	/*
 	public String HEYHEYHEY(){
 		String tmp = "";
 		for(int i =0;i<pets.size(); i++){
@@ -143,7 +144,7 @@ public class OwnerOfPet implements Serializable {
 		}
 		return tmp;
 	}
-	
+	*/
 	
 	
 }

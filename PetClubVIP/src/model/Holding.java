@@ -18,18 +18,30 @@ import java.util.GregorianCalendar;
 public class Holding implements Serializable {
 	private ArrayList<Club> clubs;
 	public static String FLATCLUBES = "data/Clubes.txt";
-	public static String SEARCHROUTE ="data/owners.dat";
+	public static String FLATOWNERS = "data/Clubes1.txt";
+	public static String FLATPETS = "data/Clubes2.txt";
+
 	
 		public Holding(){
-			clubs = new ArrayList<Club>();
-			
-			
+	
+			clubs = new ArrayList<Club>();		
 			setUpClub();
 			loadClub();
 			adderOfOwners();
+			adderOfOwners1();
+			
+			
 			
 		}
 		
+		public ArrayList<Club> getClubs() {
+			return clubs;
+		}
+
+		public void setClubs(ArrayList<Club> clubs) {
+			this.clubs = clubs;
+		}
+
 		public String addClub(String a, String b ,String c, String d) {
 			String msg = "Todo Perfecto";
 			try{
@@ -60,7 +72,7 @@ public class Holding implements Serializable {
 			}
 			return tmp;
 		}
-		public String setUpClub() {
+		public void setUpClub() {
 			String tmp = "";
 			
 			try{
@@ -78,9 +90,9 @@ public class Holding implements Serializable {
 			}catch(Exception e){
 				e.printStackTrace();
 			}
-			return tmp;
+			//return tmp;
 		}
-		public String searchClubToAdOwner(String id, String ownerID,String name, String lastName,  String date) throws NoPrameterFoundedException  {
+		public void searchClubToAdOwner(String id, String ownerID,String name, String lastName,  String date) throws NoPrameterFoundedException  {
 			String msg = "Agregado exitosamente";
 			OwnerOfPet tmpOwner = null;
 			try {
@@ -96,7 +108,7 @@ public class Holding implements Serializable {
 			}
 			
 			
-			return msg;
+			//return msg;
 		}
 	
 		
@@ -144,7 +156,9 @@ public class Holding implements Serializable {
 			
 			return msg;
 		}
-		public void organizeWithId(){
+		public String organizeWithId(){
+			
+			String info = "";
 			for(int i = clubs.size(); i>0; i--){
 				
 				for(int j = 0; j<clubs.size(); j++){
@@ -156,9 +170,13 @@ public class Holding implements Serializable {
 						 clubs.set(j, actual);
 					 }
 				}
+				info = clubs.get(i).toString();
 			}
+			return info;
 		}
-		public void organizeWithName(){
+		public String organizeWithName(){
+			
+			String info = "";
 			for(int i = clubs.size(); i>0; i--){
 				for(int j =0; j<clubs.size(); j++) {
 					Club insert = (Club)clubs.get(j);
@@ -169,9 +187,14 @@ public class Holding implements Serializable {
 						clubs.set(j, actual);
 					}
 				}
+				
+				info = clubs.get(i).toString();
 			}
+			return info;
 		}
-		public void organizeWithDate(){
+		public String organizeWithDate(){
+			
+			String info = "";
 			for(int i = clubs.size(); i>0; i--){
 				for(int j = 0; j<clubs.size(); i++){
 					Club insert = (Club)clubs.get(j);
@@ -182,8 +205,9 @@ public class Holding implements Serializable {
 						clubs.set(j+1, insert);
 					}
 				}
-				
+				info = clubs.get(i).toString();
 			}
+			return info;
 		}
 		
 		
@@ -197,7 +221,7 @@ public class Holding implements Serializable {
 				BufferedReader	bufferRead = new BufferedReader(frReader);
 				if((saveString = bufferRead.readLine())!= null){
 					while((saveString = bufferRead.readLine())!= null){
-						saveString = bufferRead.readLine();
+	
 						
 						String[] parts = saveString.split("-");
 						String part1 = parts[0];
@@ -230,43 +254,103 @@ public class Holding implements Serializable {
 		
 		
 		}
-		public String GOGOGO(){
-			String tmp = "";
-			String rnt = "";
-			for(int i = 0; i<clubs.size(); i++){
-				tmp += clubs.get(i).getName();
-				
-			}
-			return tmp + rnt;
-		}
-		public void adderOfOwners(){
-			int centinel = 0;
 		
-			String tmp = "";
+		public void adderOfOwners(){
+
+            File file = new File(FLATOWNERS);
+            try {
+                FileReader filRe = new FileReader(file);
+                BufferedReader bufferRead = new BufferedReader(filRe);
+                for (int i = 0; i<clubs.size(); i++) {
+                    int centinel = 0;
+                    String tmp = bufferRead.readLine();
+                    while((tmp)!=null && centinel < 10000) {
+                        //tmp = bufferRead.readLine();
+                        String[] parts = tmp.split(",");
+                        String part1 = parts[0];
+                        String part2 = parts[1];
+                        String part3 = parts[2];
+                        String part4 = parts[3];
+                        clubs.get(i).creatEOwner(part1, part2, part3, part4);
+                        centinel++;
+                        tmp = bufferRead.readLine();
+
+
+                    }
+                }
+
+                 bufferRead.close();
+                 filRe.close();
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+
+
+        }
+		/*
+		public void beta1(){
+			   File file = new File(FLATOWNERS);
+	            try {
+	                FileReader filRe = new FileReader(file);
+	                BufferedReader bufferRead = new BufferedReader(filRe);
+	                String tmp ;
+	                for (int i = 0; i<clubs.size(); i++) {
+	                    int centinel = 0;
+	                    while((tmp=bufferRead.readLine())!=null&& centinel < 10000) {
+	                        String[] parts = tmp.split(",");
+	                        String part1 = parts[0];
+	                        String part2 = parts[1];
+	                        String part3 = parts[2];
+	                        String part4 = parts[3];
+	                        clubs.get(i).getOwners().add(new OwnerOfPet(part1, part2, part3, part4));
+	                        centinel++;
+
+
+	                    }
+	                }
+
+	                 bufferRead.close();
+	                 filRe.close();
+
+	            }
+	            catch(Exception e){
+	                e.printStackTrace();
+	            }
+		}
+		*/
+		public void adderOfOwners1(){
+			int centinel = 0;
+			
+			File file = new File(FLATPETS);
 			try {
-				
-				File file = new File("mocks/PORFINOWNERS.csv");
 				FileReader filRe = new FileReader(file);
 				BufferedReader bufferRead = new BufferedReader(filRe);
-				for (int i = 0; i<clubs.size(); i++) {
-					while(centinel<10000 && (tmp=bufferRead.readLine())!=null) {
+				String tmp;
+				for(Club clubss:clubs) {
+					
+				for (int i = 0; i<clubss.getOwners().size(); i++) {
+					while(centinel<2 && (tmp=bufferRead.readLine())!=null) {
+						//tmp=bufferRead.readLine();
 						String[] parts = tmp.split(",");
 						String part1 = parts[0];
 						String part2 = parts[1];
 						String part3 = parts[2];
 						String part4 = parts[3];
+						String part5 = parts[4];
+						clubss.getOwners().get(i).addPetToAnOwner(part1, part2, part3, part4, part5);/*creatEOwner(part1, part2, part3, part4)*/;
 						centinel++;
-						clubs.get(i).creatEOwner(part1, part2, part3, part4);
-						
-						System.out.println( clubs.get(i).getOwners().get(i).toString());
-						
 					}
+					
 				}
 				 
 				 bufferRead.close();
 				 filRe.close();
 				
 			}
+		}
 			catch(Exception e){
 				e.printStackTrace();
 			}
@@ -274,18 +358,27 @@ public class Holding implements Serializable {
 			
 			
 		}
-		/*
-		public String GOGOGO2(){
-			String tmp = "";
-			String rnt = "";
-			for(int i = 0; i<clubs.size(); i++){
-				
-				rnt += clubs.get(i).getOwners().get(i).getName();
+		public String binarySearchingById(String id){
+			String clubInfo = "";
+			boolean finded = false;
+			int startAt = 0;
+			int deadAt = clubs.size()-1; 
+			while((startAt <= deadAt) && finded == false) {
+				int mediumValue = (startAt + deadAt)/2;
+				if(clubs.get(mediumValue).getId().equals(id)) {
+					clubInfo = clubs.get(mediumValue).toString();
+				}
+				else if(clubs.get(mediumValue).compareClubWithId(id)>0) {
+					deadAt = mediumValue -1;
+				}
+				else{
+					startAt = mediumValue+1;
+				}
 			}
-			return rnt;
-		
+			
+			return clubInfo;
 		}
-		*/
+		
 		
 		
 	

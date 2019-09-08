@@ -59,7 +59,7 @@ public class Main {
 						System.out.println("Ingrese el tipo de mascotas permitidas para este club");
 						String allowedPet = dataRead.nextLine();
 						System.out.println(happyholding.addClub(clubId, clubName, dateactual, allowedPet));
-						System.out.println(happyholding.GOGOGO() );
+						
 						complete = true;
 						menu(0);
 					break;
@@ -83,7 +83,7 @@ public class Main {
 						int dayDuenio = dataRead.nextInt();dataRead.nextLine();
 						String dateactualborn = Integer.toString(yearDuenio+monthDuenio+dayDuenio);
 					try {
-						System.out.println(happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, dateactualborn));
+						happyholding.searchClubToAdOwner(clubIdSearch, id, name, lastname, dateactualborn);
 					} catch (NoPrameterFoundedException e) {
 						System.out.println("Ingreso los valores fuera de los rangos de las fechas permitidas");
 					}
@@ -139,17 +139,26 @@ public class Main {
 						complete = true;
 						menu(0);
 					break;
-				case 4: ;
-					System.out.println("GRACIAS!!!!");
-					complete = true;
+				case 4: System.out.println("Ordenar Clubes por ID");
+						happyholding.organizeWithId();
+						complete = true;
+						menu(0);
 					break;
-				case 5: ;
+				case 5: System.out.println("Ordenar Clubes por nombre");
+						happyholding.organizeWithName(); 
+						complete = true;
+						menu(0);
 					break;
-				case 6: ;
+				case 6: System.out.println("Ordenar Clubes por Fecha");
+						happyholding.organizeWithDate();
+						complete = true;
+						menu(0);
 					break;
 				case 7: ;
 					break;
 				case 8: ;
+				System.out.println("GRACIAS!!!!");
+				complete = true;
 					break;
 					
 				}	
@@ -166,9 +175,9 @@ public class Main {
 		System.out.println("1.  Registrar un club"); 
 		System.out.println("2.  Registrar datos del duenio de una mascota"); 
 		System.out.println("3.  Registrar mascotas"); 
-		System.out.println("4.  Generar listado de clubes"); 
-		System.out.println("5.  Generar listado de duenios"); 
-		System.out.println("6.  Gnerar listado ordenado de mascotas");
+		System.out.println("4.  Ordenar Clubes por ID"); 
+		System.out.println("5.  Ordenar Clubes por nombre"); 
+		System.out.println("6.  Ordenar Clubes por Fecha");
 		
 		
 		/*
