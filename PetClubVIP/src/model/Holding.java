@@ -267,7 +267,7 @@ public class Holding implements Serializable {
 		
 		
 		}
-		//CANTIDAS DE OWNERS A SERIALIZAR
+////////////////////////////////////////////////////////////////////CANTIDAS DE OWNERS A SERIALIZAR////////////////////////////////////////////////////////////////////////////////////////////////////////
 		public void adderOfOwners(){
 
             File file = new File(FLATOWNERS);
@@ -277,7 +277,7 @@ public class Holding implements Serializable {
                 for (int i = 0; i<clubs.size(); i++) {
                     int centinel = 0;
                     String tmp = bufferRead.readLine();
-                    while((tmp)!=null && centinel < 100) {
+                    while((tmp)!=null && centinel < 10) {
                         //tmp = bufferRead.readLine();
                         String[] parts = tmp.split(",");
                         String part1 = parts[0];
@@ -308,7 +308,7 @@ public class Holding implements Serializable {
         }
 	
 		
-		//ACA DEFINO LA CANTIDAD DE PETS QUE QUIERO AGREGAR
+/////////////////////////////////////////////////////////ACA DEFINO LA CANTIDAD DE PETS QUE QUIERO AGREGAR///////////////////////////////////////////////////////////////////////////////////////
 		
 		public void adderOfOwners1(){
 			int centinel = 0;
@@ -321,7 +321,7 @@ public class Holding implements Serializable {
 				for(Club clubss:clubs) {
 					
 				for (int i = 0; i<clubss.getOwners().size(); i++) {
-					while(centinel<4 && (tmp=bufferRead.readLine())!=null) {
+					while(centinel<2 && (tmp=bufferRead.readLine())!=null) {
 						//tmp=bufferRead.readLine();
 						String[] parts = tmp.split(",");
 						String part1 = parts[0];
@@ -413,6 +413,27 @@ public class Holding implements Serializable {
 			String msg = "";
 			for(int i = 0; i<clubs.size(); i++){
 			msg +=	clubs.get(i).toString();
+			}
+			return msg;
+		}
+		public void organizeOwnersByNumberOfPet() {
+			for(int i = 0; i<clubs.size(); i++) {
+				clubs.get(i).organizeOwnersByNumberOfPet();
+			}
+		}
+		public String ShoWArrayListOwners() {
+			String msg = "";
+			for(int i = 0; i<clubs.size(); i++){
+			msg +=	clubs.get(i).getOwners().get(i).toString();
+			}
+			return msg;
+		}
+		public String searchClubToDelete(String clubId, String ownerId) {
+			String msg = "";
+			for(int i = 0; i<clubs.size(); i++) {
+				if(clubs.get(i).getId().equals(clubId)) {
+					msg =clubs.get(i).searchOwnerToDeleteWithId(ownerId);
+				}
 			}
 			return msg;
 		}

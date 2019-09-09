@@ -43,7 +43,7 @@ public class OwnerOfPet implements Serializable {
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
+	} 
 	public String getName() {
 		return name;
 	}
@@ -79,7 +79,9 @@ public class OwnerOfPet implements Serializable {
 	public int compareOwnerWithBornDate(OwnerOfPet owner){
 		return owner.getBornDate().compareTo(bornDate);
 	}
-	
+	public String toString() {
+		return "Id:  "+ id +" "+"Nombre: "+  name + "Apellido: "+ lastname + "Nacimiento " + bornDate;
+	}
 	
 	public void organizeWithId(){
 		for(int i = pets.size(); i>0; i--){

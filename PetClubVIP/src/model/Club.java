@@ -264,6 +264,16 @@ public class Club  implements Serializable{
 			owners.set(position, tmp);
 		}
 	}
+	public String searchOwnerToDeleteWithId(String idOwner) {
+		String msg = "";
+		for(int i = 0; i<owners.size(); i++) {
+			if(owners.get(i).getId().equals(idOwner)) {
+			 msg = owners.get(i).toString();
+				owners.remove(i);
+			}
+		}
+		return msg;
+	}
 	
 	//
 }

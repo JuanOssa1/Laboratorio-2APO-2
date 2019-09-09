@@ -162,23 +162,35 @@ public class Main {
 						System.out.println("Ingrese el id del club que desea eliminar");
 						String idRemove = dataRead.nextLine();
 						System.out.println(happyholding.deleteClubWithId(idRemove));
+						menu(0);
 					break;
 				case 8: System.out.println("Eliminar Club por id");
 						System.out.println("Ingrese el nombre del club que quiere eliminar");
 						String nameRemove = dataRead.nextLine();
 						System.out.println(happyholding.deleteClubWithName(nameRemove));
+						menu(0);
 						
 					break;
 				case 9: System.out.println("Mostrando Listado.."); 
 						happyholding.organizeClubByNumberOfOwners();
 						System.out.println(happyholding.ShoWArrayList());
 						dataRead.nextLine();
+						menu(0);
 					break;
 					
 				case 10: System.out.println("Mostrando Listado");
+						 happyholding.organizeOwnersByNumberOfPet();		
+						 System.out.println(happyholding.ShoWArrayListOwners());
+						 dataRead.nextLine();
+						 menu(0);
 					break;	
 					
-				case 11:;
+				case 11: System.out.println("Borrando porfavor espera!");
+						 System.out.println("Ingrese el id del club");
+						 String clubIdDelete = dataRead.nextLine();
+						 System.out.println("Ingrese el Id del cliente");
+						 String ownerId = dataRead.nextLine();
+						 System.out.println(happyholding.searchClubToDelete(clubIdDelete, ownerId));
 					break;
 				
 				case 12:;
