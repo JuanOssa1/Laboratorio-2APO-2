@@ -265,7 +265,7 @@ public class Holding implements Serializable {
 		
 		
 		}
-		
+		//CANTIDAS DE OWNERS A SERIALIZAR
 		public void adderOfOwners(){
 
             File file = new File(FLATOWNERS);
@@ -304,37 +304,10 @@ public class Holding implements Serializable {
 
 
         }
-		/*
-		public void beta1(){
-			   File file = new File(FLATOWNERS);
-	            try {
-	                FileReader filRe = new FileReader(file);
-	                BufferedReader bufferRead = new BufferedReader(filRe);
-	                String tmp ;
-	                for (int i = 0; i<clubs.size(); i++) {
-	                    int centinel = 0;
-	                    while((tmp=bufferRead.readLine())!=null&& centinel < 10000) {
-	                        String[] parts = tmp.split(",");
-	                        String part1 = parts[0];
-	                        String part2 = parts[1];
-	                        String part3 = parts[2];
-	                        String part4 = parts[3];
-	                        clubs.get(i).getOwners().add(new OwnerOfPet(part1, part2, part3, part4));
-	                        centinel++;
-
-
-	                    }
-	                }
-
-	                 bufferRead.close();
-	                 filRe.close();
-
-	            }
-	            catch(Exception e){
-	                e.printStackTrace();
-	            }
-		}
-		*/
+	
+		
+		//ACA DEFINO LA CANTIDAD DE PETS QUE QUIERO AGREGAR
+		
 		public void adderOfOwners1(){
 			int centinel = 0;
 			
@@ -346,7 +319,7 @@ public class Holding implements Serializable {
 				for(Club clubss:clubs) {
 					
 				for (int i = 0; i<clubss.getOwners().size(); i++) {
-					while(centinel<2 && (tmp=bufferRead.readLine())!=null) {
+					while(centinel<4 && (tmp=bufferRead.readLine())!=null) {
 						//tmp=bufferRead.readLine();
 						String[] parts = tmp.split(",");
 						String part1 = parts[0];

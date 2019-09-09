@@ -1,5 +1,11 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +15,7 @@ public class OwnerOfPet implements Serializable {
 	/**
 	 * 
 	 */
+	public static String SEARCHROUTE = "cargadores/SerializedPets"; 
 	private static final long serialVersionUID = 1108525721666481918L;
 	private String id;
 	private String name;
@@ -22,6 +29,8 @@ public class OwnerOfPet implements Serializable {
 		this.lastname = lastname;
 		this.bornDate = bornDate;
 		pets = new ArrayList<Pet>();
+		fileCreatorPet();
+		loadPet();
 	}
 	public String getId() {
 		return id;
@@ -43,13 +52,14 @@ public class OwnerOfPet implements Serializable {
 	}
 	public String getBornDate() {
 		return bornDate;
-	}
+	} 
 	public void setBornDate(String bornDate) {
 		this.bornDate = bornDate;
 	}
 	public void addPetToAnOwner(String petId, String petName, String petType, String gender, String date){
 		Pet pet = new Pet( petId,  petName, petType,   gender,  date);
 		pets.add(pet);
+		fileCreatorPet();
 	}
 	public int compareOwnerWithId(OwnerOfPet owner){
 		return owner.getId().compareTo(id);
@@ -145,6 +155,66 @@ public class OwnerOfPet implements Serializable {
 		return tmp;
 	}
 	*/
+		public void fileCreatorPet()  {
+			
+			
+			
+			try {
+				
+				ObjectOutputStream duct = new ObjectOutputStream(new FileOutputStream(SEARCHROUTE));
+				duct.writeObject(pets);
+				duct.close();
+			}
+			catch(FileNotFoundException e){
+				e.printStackTrace();
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+			
+		}
+		public void createFile(){
+			
+		}
+	
+	
+	
+	
+	
+	
+	
+		//DESERIALIZA
+		public void loadPet(){
+			FileInputStream archivoCodificadoEntrada = null;
+			//File file = new File(SEARCHROUTE);
+			ArrayList<Pet> p;
+			
+			try {
+				
+				/*if(file.exists()){*/
+					archivoCodificadoEntrada = new FileInputStream(SEARCHROUTE);
+					ObjectInputStream conductoEntrada = new ObjectInputStream(archivoCodificadoEntrada);
+					p = (ArrayList<Pet>)conductoEntrada.readObject();
+					pets = p;
+				/*}*/
+				/*
+				else{
+					
+					file.createNewFile();
+					
+				}
+				*/
+			}
+			catch(FileNotFoundException e){
+				e.printStackTrace();
+			}
+			catch(IOException e){
+				e.printStackTrace();
+			}
+			catch(ClassNotFoundException e){
+				e.printStackTrace();
+			}
+		}
 	
 	
 }
