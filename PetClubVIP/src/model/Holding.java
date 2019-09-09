@@ -99,8 +99,9 @@ public class Holding implements Serializable {
 				for(int i = 0; i<clubs.size(); i++){
 					if(clubs.get(i).getId().equals(id)){
 						tmpOwner = creatEOwner( id,  name,  lastName, date );
-						clubs.get(i).getOwners().add(tmpOwner);		
-						//saveClub(tmpOwner);
+						clubs.get(i).getOwners().add(tmpOwner);	
+						adderOfOwners();
+						
 					}
 				}
 			}catch(NullPointerException e){
@@ -176,23 +177,23 @@ public class Holding implements Serializable {
 			return info;
 		}
 		*/
-		public String organizeWithId(){
+		public void organizeWithId(){
 			String info = "";
 			for (int i = 1; i<clubs.size(); i++){
 				for(int j = i; j>0 && clubs.get(j-1).compareClubWithId(clubs.get(j)) > 0; j--){
 					Club tmp = clubs.get(j);
 					clubs.set(j, clubs.get(j-1));
 					clubs.set(j-1, tmp);
-					
+				
 				}
-				info += clubs.get(i).toString();
+				
 			}
-			return info;
+			
 			
 		}
-		public String organizeWithName(){
+		public void organizeWithName(){
 			
-			String info = "";
+		
 			for (int i = 1; i<clubs.size(); i++){
 				for(int j = i; j>0 && clubs.get(j-1).compareClubWithName(clubs.get(j)) > 0; j--){
 					Club tmp = clubs.get(j);
@@ -200,14 +201,14 @@ public class Holding implements Serializable {
 					clubs.set(j-1, tmp);
 					
 				}
-				info += clubs.get(i).toString();
+				
 			}
-			return info;
+		
 			
 		}
-		public String organizeWithDate(){
+		public void organizeWithDate(){
 			
-			String info = "";
+			
 			for (int i = 1; i<clubs.size(); i++){
 				for(int j = i; j>0 && clubs.get(j-1).compareClubWithDateOfCreation(clubs.get(j)) > 0; j--){
 					Club tmp = clubs.get(j);
@@ -215,9 +216,10 @@ public class Holding implements Serializable {
 					clubs.set(j-1, tmp);
 					
 				}
-				info += clubs.get(i).toString();
+			
+				
 			}
-			return info;
+			
 			
 		}
 		
@@ -351,8 +353,8 @@ public class Holding implements Serializable {
 			int startAt = 0;
 			int deadAt = clubs.size()-1; 
 			while((startAt <= deadAt) && finded == false) {
-				int mediumValue = (startAt + deadAt)/2;
-				if(clubs.get(mediumValue).getId().equals(id)) {
+				int mediumValue = (startAt + deadAt)/2; 
+				if(clubs.get(mediumValue).getId().equals(id)) { 
 					clubInfo = clubs.get(mediumValue).toString();
 				}
 				else if(clubs.get(mediumValue).compareClubWithId(id)>0) {
@@ -366,6 +368,54 @@ public class Holding implements Serializable {
 			return clubInfo;
 		}
 		
+		public String deleteClubWithId(String id ){
+			String msg = "";
+			for(int i = 0; i<clubs.size(); i++ ){
+				if(clubs.get(i).getId().equals(id)){
+					msg = clubs.get(i).toString();
+					clubs.remove(i);
+				}
+			}
+			return msg;
+		}
+		public String deleteClubWithName(String name){
+			String msg = "";
+			for(int i = 0; i<clubs.size(); i++){
+				if(clubs.get(i).getName().equals(name)) {
+					msg = clubs.get(i).toString();
+					clubs.remove(i);
+				}
+				
+			}
+			return msg;
+		}
+		public void organizeClubByNumberOfOwners() {
+			Club tmp = null;
+			Club tmp1 = null;
+			for(int i = clubs.size(); i>0; i--) {
+				for(int j = 0; j<-1-1; j++ ) {
+					if(clubs.get(j).numberOfOwners(clubs.get(j), clubs.get(j+1))>0) {
+						tmp = clubs.get(j);
+						tmp1 = clubs.get(j+1);
+						clubs.set(j, tmp1);
+						clubs.set(j+1, tmp);
+					}
+					else {
+						clubs.set(j, tmp);
+						clubs.set(j+1, tmp1);
+					}
+				}
+			}
+		}
+		
+		
+		public String ShoWArrayList() {
+			String msg = "";
+			for(int i = 0; i<clubs.size(); i++){
+			msg +=	clubs.get(i).toString();
+			}
+			return msg;
+		}
 		
 		
 	

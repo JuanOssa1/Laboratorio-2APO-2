@@ -18,7 +18,7 @@ public class Pet implements Serializable{
 	private String gender;
 	public Pet(String petId, String petName, String bornDate, String petType, String gender) {
 		super();
-		this.petId = petId;
+		this.petId = petId; 
 		this.petName = petName;
 		this.bornDate = bornDate;
 		this.petType = petType;

@@ -15,7 +15,7 @@ public class OwnerOfPet implements Serializable {
 	/**
 	 * 
 	 */
-	public static String SEARCHROUTE = "cargadores/SerializedPets"; 
+	public static String SEARCHROUTE = "cargadores/SerializedPets";  
 	private static final long serialVersionUID = 1108525721666481918L;
 	private String id;
 	private String name;
@@ -34,6 +34,12 @@ public class OwnerOfPet implements Serializable {
 	}
 	public String getId() {
 		return id;
+	}
+	public ArrayList<Pet> getPets() {
+		return pets;
+	}
+	public void setPets(ArrayList<Pet> pets) {
+		this.pets = pets;
 	}
 	public void setId(String id) {
 		this.id = id;
@@ -215,6 +221,9 @@ public class OwnerOfPet implements Serializable {
 				e.printStackTrace();
 			}
 		}
-	
+		public int numberOfPets(OwnerOfPet OwnerOfPet1,OwnerOfPet OwnerOfPet2){
+
+			return OwnerOfPet1.getPets().size() - OwnerOfPet2.getPets().size(); 
+		}
 	
 }

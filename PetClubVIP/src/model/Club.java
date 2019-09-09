@@ -207,7 +207,7 @@ public class Club  implements Serializable{
 	
 	
 	
-	
+	 
 	
 	
 	//DESERIALIZA
@@ -242,7 +242,28 @@ public class Club  implements Serializable{
 			e.printStackTrace();
 		}
 	}
+	public int numberOfOwners(Club club1,Club club2){
+
+		return club1.getOwners().size() - club2.getOwners().size();
+	}
 	
+	
+	public void organizeOwnersByNumberOfPet(){
+		for(int i = 0; i < owners.size()-1; i++ ) {
+			OwnerOfPet ownerQuantity = owners.get(i);
+			int low = owners.get(i).numberOfPets(owners.get(i), owners.get(i+1));
+			int position = i;
+			for(int j = i+1; j < owners.size(); j++) {
+				if(owners.get(j).numberOfPets(owners.get(j), owners.get(i))<low) {
+					ownerQuantity = owners.get(j);
+					 position = j;
+				}
+			}
+			OwnerOfPet tmp = owners.get(i);
+			owners.set(i, ownerQuantity);
+			owners.set(position, tmp);
+		}
+	}
 	
 	//
 }

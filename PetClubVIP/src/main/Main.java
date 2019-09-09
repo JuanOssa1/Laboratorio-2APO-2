@@ -141,25 +141,58 @@ public class Main {
 						menu(0);
 					break;
 				case 4: System.out.println("Ordenar Clubes por ID");
-						System.out.println(happyholding.organizeWithId());
+				        happyholding.organizeWithId();
+						System.out.println(happyholding.ShoWArrayList()); 
 						complete = true;
 						menu(0);
 					break;
 				case 5: System.out.println("Ordenar Clubes por nombre");
-						System.out.println(happyholding.organizeWithName());
+						happyholding.organizeWithName();
+						System.out.println(happyholding.ShoWArrayList()); 
 						complete = true;
 						menu(0);
 					break; 
-				case 6: System.out.println("Ordenar Clubes por Fecha");
-						System.out.println(happyholding.organizeWithDate());
+				case 6: System.out.println("Ordenar Clubes por Fecha"); 
+						happyholding.organizeWithDate();
+						System.out.println(happyholding.ShoWArrayList()); 
 						complete = true;
 						menu(0);
 					break;
-				case 7: ;
+				case 7: System.out.println("Eliminar Club por nombre");
+						System.out.println("Ingrese el id del club que desea eliminar");
+						String idRemove = dataRead.nextLine();
+						System.out.println(happyholding.deleteClubWithId(idRemove));
 					break;
-				case 8: ;
-				System.out.println("GRACIAS!!!!");
-				complete = true;
+				case 8: System.out.println("Eliminar Club por id");
+						System.out.println("Ingrese el nombre del club que quiere eliminar");
+						String nameRemove = dataRead.nextLine();
+						System.out.println(happyholding.deleteClubWithName(nameRemove));
+						
+					break;
+				case 9: System.out.println("Mostrando Listado.."); 
+						happyholding.organizeClubByNumberOfOwners();
+						System.out.println(happyholding.ShoWArrayList());
+						dataRead.nextLine();
+					break;
+					
+				case 10: System.out.println("Mostrando Listado");
+					break;	
+					
+				case 11:;
+					break;
+				
+				case 12:;
+					break;
+				
+				case 13:;
+					break;
+					
+				case 14:;
+					break;
+					
+				case 15:;
+					System.out.println("GRACIAS!!!!");
+					complete = true;
 					break;
 					
 				}	
@@ -179,6 +212,16 @@ public class Main {
 		System.out.println("4.  Ordenar Clubes por ID"); 
 		System.out.println("5.  Ordenar Clubes por nombre"); 
 		System.out.println("6.  Ordenar Clubes por Fecha");
+		System.out.println("7.  Eliminar Club por id");
+		System.out.println("8.  Eliminar Club por nombre");
+		System.out.println("9.  Ordenar Club por numero de duenios");
+		System.out.println("10. Ordenar dueños por numero de mascotas");																												
+		System.out.println("11. Eliminar dueño con el id");
+		System.out.println("12. Eliminar dueño con el Nombre");
+		System.out.println("13. Eliminar animal con su id");
+		System.out.println("14. Eliminar animal con su nombre");
+		System.out.println("15. Cerrar el programa");
+		
 		
 		
 		/*
