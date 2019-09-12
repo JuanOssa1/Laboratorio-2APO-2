@@ -1,0 +1,10 @@
+1,Nathan,11/11/2012,Male,DOG
+2,Bart,5/13/1971,Male,CAT
+3,Oliver,2/8/1993,Male,BIRD
+4,Benny,6/2/2003,Male,DOG
+5,Liam,8/9/1986,Male,CAT
+6,Ivy,1/8/1965,Female,BIRD
+7,Carl,1/18/2002,Male,DOG
+8,Mavis,4/23/1960,Female,CAT
+9,Rachael,11/27/1961,Female,BIRD
+10,Samara,5/21/1955,Female,DOG
